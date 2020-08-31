@@ -1,0 +1,6 @@
+.chart {
+    width: auto;
+    overflow-x: scroll;
+    height: 532px;
+    box-sizing: border-box;
+}
