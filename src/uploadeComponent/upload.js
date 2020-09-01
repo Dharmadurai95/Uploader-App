@@ -164,21 +164,61 @@ export default class Uploader extends Component {
 
         let currentPost = this.pageNumberHandler()
         let chart = this.chardHanler(currentPost, title);
-        if (chart) {
-            let addIndex = chart.map((value, index) => {
-                   if(!isNaN(Object.values(value)[0])) {
-                       return { ...value, Row: `Row${index + 1}` }
-                   }
-                   return;
-                
-            })
-           
-            console.log(addIndex,'add indexs')
-            if(addIndex[0]){
-                return <MyResponsiveBar data={addIndex} />
+
+        let allowedField = [
+            'Term',
+            'NoEmp',
+            'NewExist',
+            'CreateJob',
+            'RetainedJob',
+            'UrbanRural',
+            'DisbursementGross',
+            'BalanceGross',
+            'ChgOffPrinGr',
+            'GrAppv',
+            'SBA_Appv',
+            'daysterm'
+        ]
+        let filterChart = [...chart]
+        filterChart.map((val, ind) => {
+            for (let key in filterChart[ind]) {
+                if (allowedField.indexOf(key) === -1) {
+                    delete filterChart[ind][key];
+                }
             }
-            return <h2 className='noData'>There is no chart data here</h2>
+        })
+        console.log(filterChart, 'ist i ')
+        console.log('fdslkjhdfdslkjhfdslkjhds')
+
+        // let [ ...newChart ] = chart;
+        // newChart.map((value, index) => {
+        //         for (let key in newChart[index]) {
+        //             if (allowedField.indexOf(key) === -1) {
+        //                 return  delete newChart[index][key]
+
+        //             }
+        //         }
+
+        //     })
+
+        let chartCheck = filterChart[0];
+        let dataCheck = allowedField[0]
+
+        let filteredChartData = filterChart.map((filterCharData, index) => {
+            console.log(allowedField,chart,'papooom')
+            if(chartCheck[dataCheck]){
+
+                return { ...filterCharData, Row: `Row ${index + 1}` }
+            }
+            return ;
+
+        })
+
+        if(filteredChartData[0] !== undefined) {
+            return <MyResponsiveBar data={filteredChartData} />
         }
+        return <h2 className='noData'>There is no chart data here</h2>
+
 
     }
 
@@ -209,12 +249,13 @@ export default class Uploader extends Component {
             let object = Object.assign({}, val.data);
             let obj = {}
             let finalValue = Object.values(object).map((v, index) => {
-                if (!isNaN(v) && !undefined && (v < 10000000)) {
+                if (!isNaN(v) && !undefined && (v < 100000)) {
                     let dataTitle = title[0]['data'][index];
-                    // if (!Title.includes(dataTitle)) {
-                    //     Title.push(dataTitle)
-                    // console.log(dataTitle,v,'helllo machine learning')
-                    // let ChartData = _.zipObject(dataTitle, v);
+                    if((v >5000)) {
+                        let convertOnePer = v * 0.01;
+                        let values = parseFloat(convertOnePer);
+                        return obj[dataTitle] = values;
+                    }
                     let values = parseFloat(v)
                     return obj[dataTitle] = values;
                     //  }
