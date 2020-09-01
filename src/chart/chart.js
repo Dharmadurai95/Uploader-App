@@ -7,7 +7,7 @@ import './chart.css'
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const MyResponsiveBar = (props) => {
-    console.log(props.data, 'props data',Object.keys(props.data[0]))
+    // console.log(props.data, 'props data',Object.keys(props.data[0]))
     return (
         <div className='chart'>
             <ResponsiveBarCanvas

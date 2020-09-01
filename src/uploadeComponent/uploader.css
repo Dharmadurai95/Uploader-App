@@ -92,3 +92,7 @@ img:hover { transform: scale(1.05); }
 .chartGreen:hover {
   background: rgb(13, 172, 13);
 }
+.noData {
+  text-align: center;
+  color: rgb(233, 15, 15);
+}

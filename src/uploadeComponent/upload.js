@@ -16,7 +16,7 @@ export default class Uploader extends Component {
         currentPageNo: 1,
         topList: '',
         currentPost: '',
-        chart:false
+        chart: false
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -44,7 +44,6 @@ export default class Uploader extends Component {
 
     pageNumberHandler = () => {
         let [...data] = this.state.csvCollection;
-        console.log(data, 'data')
         let remainData;
         remainData = data.slice(3)
         if (this.state.topList) {
@@ -161,67 +160,76 @@ export default class Uploader extends Component {
 
     //chart data functionality
     chartDataFunctionality = () => {
+        const title = this.state.csvCollection
+
         let currentPost = this.pageNumberHandler()
-        let chart = this.chardHanler(currentPost);
+        let chart = this.chardHanler(currentPost, title);
         if (chart) {
-           let addIndex = chart.map((value,index)=> {
-                   return {...value,Row :`Row${index + 1}`}
+            let addIndex = chart.map((value, index) => {
+                   if(!isNaN(Object.values(value)[0])) {
+                       return { ...value, Row: `Row${index + 1}` }
+                   }
+                   return;
+                
             })
-        
-             return <MyResponsiveBar data={addIndex} />
-        } 
+           
+            console.log(addIndex,'add indexs')
+            if(addIndex[0]){
+                return <MyResponsiveBar data={addIndex} />
+            }
+            return <h2 className='noData'>There is no chart data here</h2>
+        }
 
     }
 
     //table chart handler
-    chardHanler = (data) => {
-        const title = this.state.csvCollection
-                    // let chartData = {};
-                    // let chartArr = []
-                    // Object.keys(data).map((val, ind) =>
-                    //     data[val].data.map((value, index) => {
-                    //         if (!isNaN(value)) {
-                    //            
-                    // if(index == )
-                    // console.log(dataTitle,'lwnth')
-                    //             if (chartData[dataTitle]) {
-                    //                chartData[dataTitle]["data"].push(value)      
-                    //             } else {
-                    //                 chartData[dataTitle] = {data:[value]}
-                    //             }
+    chardHanler = (data, title) => {
+        // let chartData = {};
+        // let chartArr = []
+        // Object.keys(data).map((val, ind) =>
+        //     data[val].data.map((value, index) => {
+        //         if (!isNaN(value)) {
+        //            
+        // if(index == )
+        // console.log(dataTitle,'lwnth')
+        //             if (chartData[dataTitle]) {
+        //                chartData[dataTitle]["data"].push(value)      
+        //             } else {
+        //                 chartData[dataTitle] = {data:[value]}
+        //             }
 
-                    //         }
-                    //chartArr.push(chartData)
-                    //     })
+        //         }
+        //chartArr.push(chartData)
+        //     })
 
-                    // )
-                    // console.log(chartData,chartArr, 'what are titles are there')
+        // )
+        // console.log(chartData,chartArr, 'what are titles are there')
         return data.map((val, index) => {
             let Title = []
             let object = Object.assign({}, val.data);
             let obj = {}
             let finalValue = Object.values(object).map((v, index) => {
-                if (!isNaN(v) && !undefined &&  (v < 100000000)) {
+                if (!isNaN(v) && !undefined && (v < 10000000)) {
                     let dataTitle = title[0]['data'][index];
                     // if (!Title.includes(dataTitle)) {
                     //     Title.push(dataTitle)
                     // console.log(dataTitle,v,'helllo machine learning')
-                   // let ChartData = _.zipObject(dataTitle, v);
-                      let values = parseFloat(v)
-                       return obj[dataTitle] = values;
-                  //  }
+                    // let ChartData = _.zipObject(dataTitle, v);
+                    let values = parseFloat(v)
+                    return obj[dataTitle] = values;
+                    //  }
                 }
             });
-            
-            
+
+
             return obj;
         })
     }
     render() {
         // let arrOrNot = Array.isArray(dd) ? <div>{<MyResponsiveBar data={dd} /> }</div>: ;
-        let chartClass = this.state.chart ?  'chartRed' : 'chartGreen';
+        let chartClass = this.state.chart ? 'chartRed' : 'chartGreen';
         return (<div className='uploader'>
-          
+
             <div className='uploaderCard' >
                 <CSVReader
                     onDrop={this.handleOnDrop}
@@ -232,12 +240,12 @@ export default class Uploader extends Component {
                     <span>Click (Drop) Upload  Your  file</span>
                 </CSVReader>
             </div>
-           {this.state.csvCollection && <div>
-            <button onClick={() => this.setState({chart:!this.state.chart}) } className={`ChartBtn ${chartClass}`} >
-                   {this.state.chart ?"Hide Chart" :"Show Chart"}
-               </button>
-               {this.state.chart ? this.chartDataFunctionality() : ''}
-                
+            {this.state.csvCollection && <div>
+                <button onClick={() => this.setState({ chart: !this.state.chart })} className={`ChartBtn ${chartClass}`} >
+                    {this.state.chart ? "Hide Chart" : "Show Chart"}
+                </button>
+                {this.state.chart ? this.chartDataFunctionality() : ''}
+
             </div>}
             {this.state.csvCollection && <div className='pagination'>
                 <Pagination
@@ -245,7 +253,7 @@ export default class Uploader extends Component {
                     showTotal={(total, range) => `${range[0]}-${range[1]} of ${total} items`}
                     defaultPageSize={10}
                     defaultCurrent={1}
-                    pageSizeOptions={["10","25", "50", "100", "500"]}
+                    pageSizeOptions={["10", "25", "50", "100", "500"]}
                     onChange={(page, pageSize) => this.paginationHanlder(page, pageSize)}
                 />
             </div>}
