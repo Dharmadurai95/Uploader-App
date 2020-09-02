@@ -90,7 +90,10 @@ export default class Uploader extends Component {
             determineRows = topRows[2]['data'];
             if (!determineRows.every((dat) => (/<\/?[a-z][\s\S]*>/i.test(dat)))) {
                 topRows = head.slice(0, 2)
-                this.setState({ topList: true })
+                if(!this.state.topList ){
+
+                    this.setState({ topList: true })
+                }
             }
         }
         return topRows.map((data, index) => {
@@ -251,8 +254,8 @@ export default class Uploader extends Component {
             let finalValue = Object.values(object).map((v, index) => {
                 if (!isNaN(v) && !undefined && (v < 100000)) {
                     let dataTitle = title[0]['data'][index];
-                    if((v >5000)) {
-                        let convertOnePer = v * 0.01;
+                    if((v >=3000)) {
+                        let convertOnePer = (v * 0.01);
                         let values = parseFloat(convertOnePer);
                         return obj[dataTitle] = values;
                     }
