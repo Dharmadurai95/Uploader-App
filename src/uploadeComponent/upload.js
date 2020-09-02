@@ -190,8 +190,7 @@ export default class Uploader extends Component {
                 }
             }
         })
-        console.log(filterChart, 'ist i ')
-        console.log('fdslkjhdfdslkjhfdslkjhds')
+  
 
         // let [ ...newChart ] = chart;
         // newChart.map((value, index) => {
@@ -208,7 +207,6 @@ export default class Uploader extends Component {
         let dataCheck = allowedField[0]
 
         let filteredChartData = filterChart.map((filterCharData, index) => {
-            console.log(allowedField,chart,'papooom')
             if(chartCheck[dataCheck]){
 
                 return { ...filterCharData, Row: `Row ${index + 1}` }
@@ -227,26 +225,7 @@ export default class Uploader extends Component {
 
     //table chart handler
     chardHanler = (data, title) => {
-        // let chartData = {};
-        // let chartArr = []
-        // Object.keys(data).map((val, ind) =>
-        //     data[val].data.map((value, index) => {
-        //         if (!isNaN(value)) {
-        //            
-        // if(index == )
-        // console.log(dataTitle,'lwnth')
-        //             if (chartData[dataTitle]) {
-        //                chartData[dataTitle]["data"].push(value)      
-        //             } else {
-        //                 chartData[dataTitle] = {data:[value]}
-        //             }
-
-        //         }
-        //chartArr.push(chartData)
-        //     })
-
-        // )
-        // console.log(chartData,chartArr, 'what are titles are there')
+      
         return data.map((val, index) => {
             let Title = []
             let object = Object.assign({}, val.data);
