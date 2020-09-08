@@ -234,7 +234,7 @@ export default class Uploader extends Component {
         })
     }
     render() {
-
+        //button dynamic classes
         let chartClass = this.state.chart ? 'chartRed' : 'chartGreen';
         let codeHighLightClass = this.state.highlighCode ? 'DisableHightlight' : 'EnableHighlight';
         return (<div className='uploader'>
