@@ -17,7 +17,8 @@ export default class Uploader extends Component {
         topList: '',
         currentPost: '',
         chart: false,
-        highlighCode: false
+        highlighCode: false,
+        titleName: ''
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -28,7 +29,7 @@ export default class Uploader extends Component {
     }
 
 
-//csv file drop handler
+    //csv file drop handler
     handleOnDrop = (data) => {
         this.setState({
             csvCollection: data,
@@ -64,7 +65,6 @@ export default class Uploader extends Component {
 
         //loop through the all incoming data and render the table formats 
         return currentPost.map((data, index) => {
-
             return (
                 <tr key={`outerBody${index}`}>
                     {data.data.map((bodyValues, index) => {
@@ -90,7 +90,6 @@ export default class Uploader extends Component {
             if (!determineRows.every((dat) => (/<\/?[a-z][\s\S]*>/i.test(dat)))) {
                 topRows = head.slice(0, 2)
                 if (!this.state.topList) {
-
                     this.setState({ topList: true })
                 }
             }
@@ -269,10 +268,10 @@ export default class Uploader extends Component {
             <div className='tableData' key={"table"}>
                 {this.state.csvCollection && (
                     <>
-                        <button onClick={() => this.setState({ highlighCode: !this.state.highlighCode })}
+                        {this.state.topList && <button onClick={() => this.setState({ highlighCode: !this.state.highlighCode })}
                             className={`Btn clrbtn ${codeHighLightClass}`}>
                             {this.state.highlighCode ? 'Disable Hightlight' : "Hightlight Data"}
-                        </button>
+                        </button>}
 
                         <table className='table'>
                             <thead key={'theadHead'}>
