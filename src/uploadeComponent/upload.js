@@ -28,7 +28,7 @@ export default class Uploader extends Component {
     }
 
 
-
+//csv file drop handler
     handleOnDrop = (data) => {
         this.setState({
             csvCollection: data,
