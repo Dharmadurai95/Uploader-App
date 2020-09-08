@@ -73,7 +73,7 @@ img:hover {
   border: none;
   outline: none;
   padding: 10px;
-  margin-left: 2%;
+  margin-left: 2.9%;
   border-radius: 5px;
 }
 .chartRed,
@@ -101,5 +101,5 @@ img:hover {
 
 .clrbtn {
   margin-left: 0px;
-  margin-bottom: 8px;
+  margin-top:2px ;
 }

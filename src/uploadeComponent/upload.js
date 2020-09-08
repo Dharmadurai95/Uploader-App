@@ -264,14 +264,15 @@ export default class Uploader extends Component {
                     pageSizeOptions={["10", "25", "50", "100", "500"]}
                     onChange={(page, pageSize) => this.paginationHanlder(page, pageSize)}
                 />
+                <button onClick={() => this.setState({ highlighCode: !this.state.highlighCode })}
+                    className={`Btn clrbtn ${codeHighLightClass}`}>
+                    {this.state.highlighCode ? 'Disable Hightlight' : "Hightlight Data"}
+                </button>
             </div>}
             <div className='tableData' key={"table"}>
                 {this.state.csvCollection && (
                     <>
-                        {this.state.topList && <button onClick={() => this.setState({ highlighCode: !this.state.highlighCode })}
-                            className={`Btn clrbtn ${codeHighLightClass}`}>
-                            {this.state.highlighCode ? 'Disable Hightlight' : "Hightlight Data"}
-                        </button>}
+
 
                         <table className='table'>
                             <thead key={'theadHead'}>
