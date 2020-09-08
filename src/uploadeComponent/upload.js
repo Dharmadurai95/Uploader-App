@@ -271,8 +271,6 @@ export default class Uploader extends Component {
             </div>}
             <div className='tableData' key={"table"}>
                 {this.state.csvCollection && (
-                    <>
-
 
                         <table className='table'>
                             <thead key={'theadHead'}>
@@ -282,7 +280,6 @@ export default class Uploader extends Component {
                                 {this.renderTableBodyData()}
                             </tbody>
                         </table>
-                    </>
                 )}
             </div>
             {this.state.singleImageSource ? <Modal close={this.closeModal}>{(this.state.singleImageSource)}</Modal> : ''}
