@@ -1,0 +1,6 @@
+.chart {
+    min-width: 1020px;
+    overflow-x:auto;
+    height: 532px;
+    box-sizing: border-box;
+}
